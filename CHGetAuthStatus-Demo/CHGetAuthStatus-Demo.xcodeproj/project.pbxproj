@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		435B53F020FC98D400F36F0E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 435B53EF20FC98D400F36F0E /* AppDelegate.m */; };
+		435B53F320FC98D400F36F0E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 435B53F220FC98D400F36F0E /* ViewController.m */; };
+		435B53F620FC98D400F36F0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 435B53F420FC98D400F36F0E /* Main.storyboard */; };
+		435B53F820FC98D500F36F0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435B53F720FC98D500F36F0E /* Assets.xcassets */; };
+		435B53FB20FC98D500F36F0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 435B53F920FC98D500F36F0E /* LaunchScreen.storyboard */; };
+		435B53FE20FC98D500F36F0E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 435B53FD20FC98D500F36F0E /* main.m */; };
+		43E6AEFB210625DA008E97A5 /* Permission.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43E6AEFA210625DA008E97A5 /* Permission.plist */; };
+		43E6AF07210635F1008E97A5 /* CHPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6AF05210635F1008E97A5 /* CHPermission.m */; };
+		43E6AF08210635F1008E97A5 /* CHGetAuthStatusTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6AF06210635F1008E97A5 /* CHGetAuthStatusTools.m */; };
+		43E6AF09210635F1008E97A5 /* CHPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6AF00210635F1008E97A5 /* CHPermission.m */; };
+		43E6AF0A210635F1008E97A5 /* CHGetAuthStatusTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6AF01210635F1008E97A5 /* CHGetAuthStatusTools.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		435B53EB20FC98D400F36F0E /* CHGetAuthStatus-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CHGetAuthStatus-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		435B53EE20FC98D400F36F0E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		435B53EF20FC98D400F36F0E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		435B53F120FC98D400F36F0E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		435B53F220FC98D400F36F0E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		435B53F520FC98D400F36F0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		435B53F720FC98D500F36F0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		435B53FA20FC98D500F36F0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		435B53FC20FC98D500F36F0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		435B53FD20FC98D500F36F0E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43E6AEFA210625DA008E97A5 /* Permission.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Permission.plist; sourceTree = "<group>"; };
+		43E6AEFE210635F1008E97A5 /* CHPermission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHPermission.h; sourceTree = "<group>"; };
+		43E6AEFF210635F1008E97A5 /* CHGetAuthStatusTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGetAuthStatusTools.h; sourceTree = "<group>"; };
+		43E6AF00210635F1008E97A5 /* CHPermission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHPermission.m; sourceTree = "<group>"; };
+		43E6AF01210635F1008E97A5 /* CHGetAuthStatusTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGetAuthStatusTools.m; sourceTree = "<group>"; };
+		43E6AF03210635F1008E97A5 /* CHPermission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHPermission.h; sourceTree = "<group>"; };
+		43E6AF04210635F1008E97A5 /* CHGetAuthStatusTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGetAuthStatusTools.h; sourceTree = "<group>"; };
+		43E6AF05210635F1008E97A5 /* CHPermission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHPermission.m; sourceTree = "<group>"; };
+		43E6AF06210635F1008E97A5 /* CHGetAuthStatusTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGetAuthStatusTools.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		435B53E820FC98D400F36F0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		435B53E220FC98D300F36F0E = {
+			isa = PBXGroup;
+			children = (
+				435B53ED20FC98D400F36F0E /* CHGetAuthStatus-Demo */,
+				435B53EC20FC98D400F36F0E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		435B53EC20FC98D400F36F0E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				435B53EB20FC98D400F36F0E /* CHGetAuthStatus-Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		435B53ED20FC98D400F36F0E /* CHGetAuthStatus-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				435B53EE20FC98D400F36F0E /* AppDelegate.h */,
+				435B53EF20FC98D400F36F0E /* AppDelegate.m */,
+				435B53F120FC98D400F36F0E /* ViewController.h */,
+				435B53F220FC98D400F36F0E /* ViewController.m */,
+				435B53F420FC98D400F36F0E /* Main.storyboard */,
+				43E6AEFA210625DA008E97A5 /* Permission.plist */,
+				43E6AEFD210635F1008E97A5 /* CHGetAuthStatusTools */,
+				435B53F720FC98D500F36F0E /* Assets.xcassets */,
+				43E6AF02210635F1008E97A5 /* CHGetAuthStatusTools */,
+				435B53F920FC98D500F36F0E /* LaunchScreen.storyboard */,
+				435B53FC20FC98D500F36F0E /* Info.plist */,
+				435B53FD20FC98D500F36F0E /* main.m */,
+			);
+			path = "CHGetAuthStatus-Demo";
+			sourceTree = "<group>";
+		};
+		43E6AEFD210635F1008E97A5 /* CHGetAuthStatusTools */ = {
+			isa = PBXGroup;
+			children = (
+				43E6AEFE210635F1008E97A5 /* CHPermission.h */,
+				43E6AEFF210635F1008E97A5 /* CHGetAuthStatusTools.h */,
+				43E6AF00210635F1008E97A5 /* CHPermission.m */,
+				43E6AF01210635F1008E97A5 /* CHGetAuthStatusTools.m */,
+			);
+			name = CHGetAuthStatusTools;
+			path = ../../CHGetAuthStatusTools;
+			sourceTree = "<group>";
+		};
+		43E6AF02210635F1008E97A5 /* CHGetAuthStatusTools */ = {
+			isa = PBXGroup;
+			children = (
+				43E6AF03210635F1008E97A5 /* CHPermission.h */,
+				43E6AF04210635F1008E97A5 /* CHGetAuthStatusTools.h */,
+				43E6AF05210635F1008E97A5 /* CHPermission.m */,
+				43E6AF06210635F1008E97A5 /* CHGetAuthStatusTools.m */,
+			);
+			path = CHGetAuthStatusTools;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		435B53EA20FC98D400F36F0E /* CHGetAuthStatus-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 435B540120FC98D500F36F0E /* Build configuration list for PBXNativeTarget "CHGetAuthStatus-Demo" */;
+			buildPhases = (
+				435B53E720FC98D400F36F0E /* Sources */,
+				435B53E820FC98D400F36F0E /* Frameworks */,
+				435B53E920FC98D400F36F0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CHGetAuthStatus-Demo";
+			productName = "CHGetAuthStatus-Demo";
+			productReference = 435B53EB20FC98D400F36F0E /* CHGetAuthStatus-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		435B53E320FC98D300F36F0E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "张晨晖";
+				TargetAttributes = {
+					435B53EA20FC98D400F36F0E = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 435B53E620FC98D300F36F0E /* Build configuration list for PBXProject "CHGetAuthStatus-Demo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 435B53E220FC98D300F36F0E;
+			productRefGroup = 435B53EC20FC98D400F36F0E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				435B53EA20FC98D400F36F0E /* CHGetAuthStatus-Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		435B53E920FC98D400F36F0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43E6AEFB210625DA008E97A5 /* Permission.plist in Resources */,
+				435B53FB20FC98D500F36F0E /* LaunchScreen.storyboard in Resources */,
+				435B53F820FC98D500F36F0E /* Assets.xcassets in Resources */,
+				435B53F620FC98D400F36F0E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		435B53E720FC98D400F36F0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43E6AF0A210635F1008E97A5 /* CHGetAuthStatusTools.m in Sources */,
+				435B53F320FC98D400F36F0E /* ViewController.m in Sources */,
+				43E6AF09210635F1008E97A5 /* CHPermission.m in Sources */,
+				43E6AF07210635F1008E97A5 /* CHPermission.m in Sources */,
+				435B53FE20FC98D500F36F0E /* main.m in Sources */,
+				435B53F020FC98D400F36F0E /* AppDelegate.m in Sources */,
+				43E6AF08210635F1008E97A5 /* CHGetAuthStatusTools.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		435B53F420FC98D400F36F0E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				435B53F520FC98D400F36F0E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		435B53F920FC98D500F36F0E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				435B53FA20FC98D500F36F0E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		435B53FF20FC98D500F36F0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		435B540020FC98D500F36F0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		435B540220FC98D500F36F0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F22VTWNS57;
+				INFOPLIST_FILE = "CHGetAuthStatus-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chenhuizhang.CHGetAuthStatus-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		435B540320FC98D500F36F0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F22VTWNS57;
+				INFOPLIST_FILE = "CHGetAuthStatus-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chenhuizhang.CHGetAuthStatus-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		435B53E620FC98D300F36F0E /* Build configuration list for PBXProject "CHGetAuthStatus-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				435B53FF20FC98D500F36F0E /* Debug */,
+				435B540020FC98D500F36F0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		435B540120FC98D500F36F0E /* Build configuration list for PBXNativeTarget "CHGetAuthStatus-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				435B540220FC98D500F36F0E /* Debug */,
+				435B540320FC98D500F36F0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 435B53E320FC98D300F36F0E /* Project object */;
+}
