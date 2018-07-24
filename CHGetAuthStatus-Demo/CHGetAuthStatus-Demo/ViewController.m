@@ -52,7 +52,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [[CHPermission sharedClass] requestAuthWithPermissionRequestType:[[self.pickerArray[row] objectForKey:@"Type"] intValue] andCompleteHandle:^(CHPermissionRequestResultType resultType) {
+    [[CHPermission sharedClass] requestAuthWithPermissionRequestType:[[self.pickerArray[row] objectForKey:@"Type"] intValue] andCompleteHandle:^(CHPermissionRequestResultType resultType, CHPermissionRequestSupportType supportType) {
         switch (resultType) {
             case CHPermissionRequestResultType_Granted:
             {

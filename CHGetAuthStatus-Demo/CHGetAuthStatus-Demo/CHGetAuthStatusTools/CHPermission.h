@@ -41,11 +41,16 @@ typedef NS_ENUM(NSUInteger, CHPermissionRequestResultType) {/// 返回结果类�
     CHPermissionRequestResultType_ParentallyRestricted,//家长权限拒绝
 };
 
+typedef NS_ENUM(NSUInteger, CHPermissionRequestSupportType) {/// 返回结果类型
+    CHPermissionRequestSupportType_Support,//支持
+    CHPermissionRequestSupportType_NotSupport,//不支持
+};
+
 @interface CHPermission : NSObject
 
 /// 全局单例访问点
 + (instancetype)sharedClass;
 
-- (void)requestAuthWithPermissionRequestType:(CHPermissionRequestType)requestType andCompleteHandle:(void(^)(CHPermissionRequestResultType resultType))completeHandle;
+- (void)requestAuthWithPermissionRequestType:(CHPermissionRequestType)requestType andCompleteHandle:(void(^)(CHPermissionRequestResultType resultType,CHPermissionRequestSupportType supportType))completeHandle;
 
 @end

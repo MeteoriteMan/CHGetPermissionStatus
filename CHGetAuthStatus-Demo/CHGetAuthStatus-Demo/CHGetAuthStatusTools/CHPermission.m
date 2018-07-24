@@ -27,17 +27,93 @@
     return permission;
 }
 
-- (void)requestAuthWithPermissionRequestType:(CHPermissionRequestType)requestType andCompleteHandle:(void(^)(CHPermissionRequestResultType resultType))completeHandle {
+- (void)requestAuthWithPermissionRequestType:(CHPermissionRequestType)requestType andCompleteHandle:(void(^)(CHPermissionRequestResultType resultType,CHPermissionRequestSupportType supportType))completeHandle {
     switch (requestType) {
         case CHPermission_None:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                completeHandle(CHPermissionRequestResultType_NotExplicit);
+                completeHandle(CHPermissionRequestResultType_NotExplicit ,CHPermissionRequestSupportType_NotSupport);
             });
         }
             break;
 
-        // MARK: 1.定位权限
+            
+            // MARK: 3.相机权限
+        case CHPermission_CameraUsage:
+        {
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            switch (authStatus) {
+                case AVAuthorizationStatusNotDetermined:
+                    //没有询问是否开启相机
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completeHandle(CHPermissionRequestResultType_NotExplicit ,CHPermissionRequestSupportType_Support);
+                    });
+                }
+                    break;
+                case AVAuthorizationStatusRestricted:
+                    //未授权，家长限制
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted ,CHPermissionRequestSupportType_Support);
+                    });
+                }
+                    break;
+                case AVAuthorizationStatusDenied:
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
+                    });
+                }
+                    break;
+                case AVAuthorizationStatusAuthorized:
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
+                    });
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+            break;
+
+        // MARK: Face_ID
+        case CHPermission_FaceIDUsage:
+        {
+            LAContext *context = [[LAContext alloc] init];
+            if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil]) {
+                if (@available(iOS 11.0, *)) {
+                    if (context.biometryType == LABiometryTypeTouchID) {
+                        NSString *reason;
+                        if ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSFaceIDUsageDescription"]) {
+                            reason = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"NSFaceIDUsageDescription"];
+                        } else {
+                            reason = @"";
+                        }
+                        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:reason reply:^(BOOL success, NSError * _Nullable error) {
+                            if (success) {
+                                completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
+                            } else {
+                                // MARK :这个可以多次调用
+                                completeHandle(CHPermissionRequestResultType_NotExplicit ,CHPermissionRequestSupportType_Support);
+                            }
+                        }];
+                    } else {///指纹识别,密码识别等
+                        completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_NotSupport);
+                    }
+                } else {
+                    // Fallback on earlier versions
+                    completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_NotSupport);
+                }
+            } else {
+                completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_NotSupport);
+            }
+        }
+            break;
+
+        // MARK: 8.9.10.定位权限
         case CHPermission_LocationLocationAlwaysUsage:
         case CHPermission_LocationLocationUsage:
         case CHPermission_LocationLocationWhenInUseUsage:
@@ -48,46 +124,46 @@
                     if (requestType == CHPermission_LocationLocationAlwaysUsage) {
                         if (status == kCLAuthorizationStatusAuthorizedAlways) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestResultType_Granted);
+                                completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
                             });
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^{/// 只开启使用时认证,不开启一直认证.返回Reject.
-                                completeHandle(CHPermissionRequestResultType_Reject);
+                                completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
                             });
                         }
                     } else if (requestType == CHPermission_LocationLocationUsage) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestResultType_Granted);
+                            completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
                         });
                     } else if (requestType == CHPermission_LocationLocationWhenInUseUsage) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestResultType_Granted);
+                            completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
                         });
                     }
                 } else if (status == kCLAuthorizationStatusRestricted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted);
+                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted ,CHPermissionRequestSupportType_Support);
                     });
                 } else if (status == kCLAuthorizationStatusNotDetermined) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_NotExplicit);
+                        completeHandle(CHPermissionRequestResultType_NotExplicit ,CHPermissionRequestSupportType_Support);
                     });
                 } else if (status == kCLAuthorizationStatusDenied) {
                     //定位不可用
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_Reject);
+                        completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
                     });
                 }
             } else {
                 //定位不可用
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completeHandle(CHPermissionRequestResultType_Reject);
+                    completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
                 });
             }
             break;
         }
 
-        // MARK: 7.麦克风权限
+        // MARK: 13.麦克风权限
         case CHPermission_MicrophoneUsage:
         {
             AVAuthorizationStatus videoAuthStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
@@ -98,11 +174,11 @@
                     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
                         if (granted) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestResultType_Granted);
+                                completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
                             });
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestResultType_Reject);
+                                completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
                             });
                         }
                     }];
@@ -111,20 +187,20 @@
                 case AVAuthorizationStatusAuthorized:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_Granted);
+                        completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
                     });
                     break;
                 }
                 case AVAuthorizationStatusRestricted:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted);
+                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted ,CHPermissionRequestSupportType_Support);
                     });
                 }
                 case AVAuthorizationStatusDenied:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_Reject);
+                        completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
                     });
                 }
                     break;
@@ -135,38 +211,37 @@
             break;
         }
 
-        // MARK: 9.相机权限
-        case CHPermission_CameraUsage:
+        // MARK: 17.相册权限
+        case CHPermission_PhotoLibraryUsage:
         {
-            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
             switch (authStatus) {
                 case AVAuthorizationStatusNotDetermined:
-                    //没有询问是否开启相机
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_NotExplicit);
-                    });
-                }
-                    break;
-                case AVAuthorizationStatusRestricted:
-                    //未授权，家长限制
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted);
-                    });
-                }
-                    break;
-                case AVAuthorizationStatusDenied:
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_Reject);
+                        completeHandle(CHPermissionRequestResultType_NotExplicit ,CHPermissionRequestSupportType_Support);
                     });
                 }
                     break;
                 case AVAuthorizationStatusAuthorized:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestResultType_Granted);
+                        completeHandle(CHPermissionRequestResultType_Granted ,CHPermissionRequestSupportType_Support);
+                    });
+                }
+                    break;
+                case AVAuthorizationStatusRestricted:
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completeHandle(CHPermissionRequestResultType_ParentallyRestricted ,CHPermissionRequestSupportType_Support);
+                    });
+                }
+                    break;
+                case AVAuthorizationStatusDenied:
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completeHandle(CHPermissionRequestResultType_Reject ,CHPermissionRequestSupportType_Support);
                     });
                 }
                     break;
@@ -175,23 +250,9 @@
             }
         }
             break;
-
         default:
             break;
     }
-//        CHPermission_None                  = 0,
-//        CHPermission_Contacts              = 2,    // 通讯录
-//        CHPermission_Calendars             = 3,    // 日历
-//        CHPermission_Reminders             = 4,    // 提醒事项
-//        CHPermission_Photos                = 5,    // 照片
-//        CHPermission_BluetoothSharing      = 6,    // 蓝牙共享
-//        CHPermission_Microphone            = 7,    // 麦克风
-//        CHPermission_SpeechRecognition     = 8,    // 语音识别 >= iOS10
-//        CHPermission_Health                = 10,   // 健康 >= iOS8.0
-//        CHPermission_HomeKit               = 11,   // 家庭 >= iOS8.0
-//        CHPermission_MediaAndAppleMusic    = 12,   // 媒体与Apple Music >= iOS9.3
-//        CHPermission_MotionAndFitness      = 13,   // 运动与健身
-
 }
 
 @end
