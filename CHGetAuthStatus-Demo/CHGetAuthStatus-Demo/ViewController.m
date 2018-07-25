@@ -52,7 +52,11 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [[CHPermission sharedClass] requestAuthWithPermissionRequestType:[[self.pickerArray[row] objectForKey:@"Type"] intValue] andCompleteHandle:^(CHPermissionRequestResultType resultType, CHPermissionRequestSupportType supportType) {
+    CHPermission *permission = [CHPermission sharedClass];
+    [permission requestAuthWithPermissionRequestType:[[self.pickerArray[row] objectForKey:@"Type"] intValue] andCompleteHandle:^(CHPermissionRequestSupportType supportType) {
+
+    }];
+    permission.permissionRequestResultBlock = ^(CHPermissionRequestResultType resultType) {
         switch (resultType) {
             case CHPermissionRequestResultType_Granted:
             {
@@ -77,7 +81,7 @@
             default:
                 break;
         }
-    }];
+    };
 }
 
 - (void)didReceiveMemoryWarning {

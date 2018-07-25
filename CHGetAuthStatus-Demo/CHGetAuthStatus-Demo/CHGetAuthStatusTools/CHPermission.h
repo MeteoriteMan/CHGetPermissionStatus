@@ -46,11 +46,15 @@ typedef NS_ENUM(NSUInteger, CHPermissionRequestSupportType) {/// 返回结果类
     CHPermissionRequestSupportType_NotSupport,//不支持
 };
 
+typedef void(^CHPermissionRequestResultBlock)(CHPermissionRequestResultType resultType);
+
 @interface CHPermission : NSObject
 
 /// 全局单例访问点
 + (instancetype)sharedClass;
 
-- (void)requestAuthWithPermissionRequestType:(CHPermissionRequestType)requestType andCompleteHandle:(void(^)(CHPermissionRequestResultType resultType,CHPermissionRequestSupportType supportType))completeHandle;
+- (void)requestAuthWithPermissionRequestType:(CHPermissionRequestType)requestType andCompleteHandle:(void(^)(CHPermissionRequestSupportType supportType))completeHandle;
+
+@property (nonatomic ,strong) CHPermissionRequestResultBlock permissionRequestResultBlock;
 
 @end
