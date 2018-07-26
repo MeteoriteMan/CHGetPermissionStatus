@@ -13,9 +13,9 @@
 		435B53F820FC98D500F36F0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435B53F720FC98D500F36F0E /* Assets.xcassets */; };
 		435B53FB20FC98D500F36F0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 435B53F920FC98D500F36F0E /* LaunchScreen.storyboard */; };
 		435B53FE20FC98D500F36F0E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 435B53FD20FC98D500F36F0E /* main.m */; };
+		43D3CC762109D95C00CB47B7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D3CC752109D95C00CB47B7 /* CoreLocation.framework */; };
 		43E6AEFB210625DA008E97A5 /* Permission.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43E6AEFA210625DA008E97A5 /* Permission.plist */; };
 		43E6AF07210635F1008E97A5 /* CHPermission.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6AF05210635F1008E97A5 /* CHPermission.m */; };
-		43E6AF08210635F1008E97A5 /* CHGetAuthStatusTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6AF06210635F1008E97A5 /* CHGetAuthStatusTools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +29,10 @@
 		435B53FA20FC98D500F36F0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		435B53FC20FC98D500F36F0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435B53FD20FC98D500F36F0E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43D3CC752109D95C00CB47B7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		43E6AEFA210625DA008E97A5 /* Permission.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Permission.plist; sourceTree = "<group>"; };
 		43E6AF03210635F1008E97A5 /* CHPermission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHPermission.h; sourceTree = "<group>"; };
-		43E6AF04210635F1008E97A5 /* CHGetAuthStatusTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHGetAuthStatusTools.h; sourceTree = "<group>"; };
 		43E6AF05210635F1008E97A5 /* CHPermission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHPermission.m; sourceTree = "<group>"; };
-		43E6AF06210635F1008E97A5 /* CHGetAuthStatusTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHGetAuthStatusTools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D3CC762109D95C00CB47B7 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +52,7 @@
 			children = (
 				435B53ED20FC98D400F36F0E /* CHGetAuthStatus-Demo */,
 				435B53EC20FC98D400F36F0E /* Products */,
+				43D3CC742109D95B00CB47B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,13 +82,19 @@
 			path = "CHGetAuthStatus-Demo";
 			sourceTree = "<group>";
 		};
+		43D3CC742109D95B00CB47B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43D3CC752109D95C00CB47B7 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		43E6AF02210635F1008E97A5 /* CHGetAuthStatusTools */ = {
 			isa = PBXGroup;
 			children = (
 				43E6AF03210635F1008E97A5 /* CHPermission.h */,
 				43E6AF05210635F1008E97A5 /* CHPermission.m */,
-				43E6AF04210635F1008E97A5 /* CHGetAuthStatusTools.h */,
-				43E6AF06210635F1008E97A5 /* CHGetAuthStatusTools.m */,
 			);
 			path = CHGetAuthStatusTools;
 			sourceTree = "<group>";
@@ -167,7 +174,6 @@
 				43E6AF07210635F1008E97A5 /* CHPermission.m in Sources */,
 				435B53FE20FC98D500F36F0E /* main.m in Sources */,
 				435B53F020FC98D400F36F0E /* AppDelegate.m in Sources */,
-				43E6AF08210635F1008E97A5 /* CHGetAuthStatusTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

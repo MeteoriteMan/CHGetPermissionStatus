@@ -228,9 +228,10 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completeHandle(CHPermissionRequestSupportType_Support);
                         });
-                        if (self.permissionRequestResultBlock) {
-                            self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
-                        }
+//                        if (self.permissionRequestResultBlock) {
+//                            self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
+//                        }
+                        [self requestLocationWithLocationType:requestType];
                     }
                         break;
                     default:
@@ -364,6 +365,38 @@
     }
 }
 
+- (void)requestLocationWithLocationType:(CHPermissionRequestType)requestType {
+    self.locationManager = [[CLLocationManager alloc] init];
+    switch (requestType) {
+        case CHPermission_LocationLocationAlwaysUsage:
+        {
+            [self.locationManager requestAlwaysAuthorization];
+        }
+            break;
+        case CHPermission_LocationLocationUsage:
+        {
+            if (@available(iOS 9.0, *)) {
+                [self.locationManager requestLocation];
+            } else {
+                // Fallback on earlier versions
+                [self.locationManager requestWhenInUseAuthorization];
+            }
+        }
+            break;
+        case CHPermission_LocationLocationWhenInUseUsage:
+        {
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+
+}
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     switch (status) {
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -421,6 +454,8 @@
         default:
             break;
     }
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager = nil;
 }
 
 @end
