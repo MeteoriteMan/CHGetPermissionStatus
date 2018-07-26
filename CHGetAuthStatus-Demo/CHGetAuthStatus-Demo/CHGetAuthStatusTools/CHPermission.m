@@ -164,62 +164,77 @@
         case CHPermission_LocationLocationUsage:
         case CHPermission_LocationLocationWhenInUseUsage:
         {
-            CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
             if ([CLLocationManager locationServicesEnabled]) {
-                if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
-                    if (requestType == CHPermission_LocationLocationAlwaysUsage) {
-                        if (status == kCLAuthorizationStatusAuthorizedAlways) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
-                            });
-                            if (self.permissionRequestResultBlock) {
-                                self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
-                            }
-                        } else {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
-                            });
+                CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+                switch (status) {
+                    case kCLAuthorizationStatusAuthorizedAlways:
+                    {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        });
+                        if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                         }
-                    } else if (requestType == CHPermission_LocationLocationUsage) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestSupportType_Support);
-                        });
-                    } else if (requestType == CHPermission_LocationLocationWhenInUseUsage) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestSupportType_Support);
-                        });
                     }
-                } else if (status == kCLAuthorizationStatusRestricted) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
-                    });
-                } else if (status == kCLAuthorizationStatusNotDetermined) {
-                    switch (requestType) {
-                        case CHPermission_LocationLocationAlwaysUsage:
-                        {
+                        break;
+                    case kCLAuthorizationStatusAuthorizedWhenInUse:
+                    {
+                        switch (self.requestType) {
+                            case CHPermission_LocationLocationAlwaysUsage:
+                            {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                });
+                                /// 请求定位授权
 
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
-                            });
+                            }
+                                break;
+                            case CHPermission_LocationLocationUsage:
+                            case CHPermission_LocationLocationWhenInUseUsage:
+                            {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                });
+                                if (self.permissionRequestResultBlock) {
+                                    self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
+                                }
+                            }
+                            default:
+                                break;
                         }
-                            break;
-                        case CHPermission_LocationLocationUsage:
-                        case CHPermission_LocationLocationWhenInUseUsage:
-                        {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
-                            });
-                        }
-                            break;
-                        default:
-                            break;
                     }
-                } else if (status == kCLAuthorizationStatusDenied) {
-                    //定位不可用
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
-                    });
+                        break;
+                    case kCLAuthorizationStatusRestricted:
+                    {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        });
+                        if (self.permissionRequestResultBlock) {
+                            self.permissionRequestResultBlock(CHPermissionRequestResultType_ParentallyRestricted);
+                        }
+                    }
+                        break;
+                    case kCLAuthorizationStatusDenied:
+                    {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        });
+                        if (self.permissionRequestResultBlock) {
+                            self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
+                        }
+                    }
+                    case kCLAuthorizationStatusNotDetermined:
+                    {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        });
+                        if (self.permissionRequestResultBlock) {
+                            self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
+                        }
+                    }
+                        break;
+                    default:
+                        break;
                 }
             } else {
                 //定位不可用
