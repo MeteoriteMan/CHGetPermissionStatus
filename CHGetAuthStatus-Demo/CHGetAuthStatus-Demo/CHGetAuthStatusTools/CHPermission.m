@@ -185,8 +185,9 @@
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     completeHandle(CHPermissionRequestSupportType_Support);
                                 });
-                                /// 请求定位授权
-
+                                if (self.permissionRequestResultBlock) {
+                                    self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
+                                }
                             }
                                 break;
                             case CHPermission_LocationLocationUsage:
@@ -374,15 +375,6 @@
         }
             break;
         case CHPermission_LocationLocationUsage:
-        {
-            if (@available(iOS 9.0, *)) {
-                [self.locationManager requestLocation];
-            } else {
-                // Fallback on earlier versions
-                [self.locationManager requestWhenInUseAuthorization];
-            }
-        }
-            break;
         case CHPermission_LocationLocationWhenInUseUsage:
         {
             [self.locationManager requestWhenInUseAuthorization];
