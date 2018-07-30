@@ -37,7 +37,9 @@
         case CHPermission_None:
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                completeHandle(CHPermissionRequestSupportType_NotSupport);
+                if (completeHandle) {
+                    completeHandle(CHPermissionRequestSupportType_NotSupport);
+                }
                 if (self.permissionRequestResultBlock) {
                     self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
                 }
@@ -57,14 +59,18 @@
                     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
                         if (granted == YES) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
+                                if (completeHandle) {
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                }
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                                 }
                             });
                         } else {
                            dispatch_async(dispatch_get_main_queue(), ^{
-                               completeHandle(CHPermissionRequestSupportType_Support);
+                               if (completeHandle) {
+                                   completeHandle(CHPermissionRequestSupportType_Support);
+                               }
                                if (self.permissionRequestResultBlock) {
                                    self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                                }
@@ -77,7 +83,9 @@
                     //未授权，家长限制
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_ParentallyRestricted);
                         }
@@ -87,7 +95,9 @@
                 case AVAuthorizationStatusDenied:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                         }
@@ -97,7 +107,9 @@
                 case AVAuthorizationStatusAuthorized:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                         }
@@ -125,33 +137,43 @@
                         }
                         [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:reason reply:^(BOOL success, NSError * _Nullable error) {
                             if (success) {
-                                completeHandle(CHPermissionRequestSupportType_Support);
+                                if (completeHandle) {
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                }
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                                 }
                             } else {
                                 // MARK :这个可以多次调用
-                                completeHandle(CHPermissionRequestSupportType_Support);
+                                if (completeHandle) {
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                }
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
                                 }
                             }
                         }];
                     } else {///指纹识别,密码识别等
-                        completeHandle(CHPermissionRequestSupportType_NotSupport);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_NotSupport);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                         }
                     }
                 } else {
                     // Fallback on earlier versions
-                    completeHandle(CHPermissionRequestSupportType_NotSupport);
+                    if (completeHandle) {
+                        completeHandle(CHPermissionRequestSupportType_NotSupport);
+                    }
                     if (self.permissionRequestResultBlock) {
                         self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                     }
                 }
             } else {
-                completeHandle(CHPermissionRequestSupportType_NotSupport);
+                if (completeHandle) {
+                    completeHandle(CHPermissionRequestSupportType_NotSupport);
+                }
                 if (self.permissionRequestResultBlock) {
                     self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                 }
@@ -170,7 +192,9 @@
                     case kCLAuthorizationStatusAuthorizedAlways:
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestSupportType_Support);
+                            if (completeHandle) {
+                                completeHandle(CHPermissionRequestSupportType_Support);
+                            }
                         });
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
@@ -183,7 +207,9 @@
                             case CHPermission_LocationLocationAlwaysUsage:
                             {
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                    if (completeHandle) {
+                                        completeHandle(CHPermissionRequestSupportType_Support);
+                                    }
                                 });
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
@@ -194,7 +220,9 @@
                             case CHPermission_LocationLocationWhenInUseUsage:
                             {
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                    if (completeHandle) {
+                                        completeHandle(CHPermissionRequestSupportType_Support);
+                                    }
                                 });
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
@@ -208,7 +236,9 @@
                     case kCLAuthorizationStatusRestricted:
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestSupportType_Support);
+                            if (completeHandle) {
+                                completeHandle(CHPermissionRequestSupportType_Support);
+                            }
                         });
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_ParentallyRestricted);
@@ -218,7 +248,9 @@
                     case kCLAuthorizationStatusDenied:
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestSupportType_Support);
+                            if (completeHandle) {
+                                completeHandle(CHPermissionRequestSupportType_Support);
+                            }
                         });
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
@@ -227,7 +259,9 @@
                     case kCLAuthorizationStatusNotDetermined:
                     {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            completeHandle(CHPermissionRequestSupportType_Support);
+                            if (completeHandle) {
+                                completeHandle(CHPermissionRequestSupportType_Support);
+                            }
                         });
 //                        if (self.permissionRequestResultBlock) {
 //                            self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
@@ -241,7 +275,9 @@
             } else {
                 //定位不可用
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completeHandle(CHPermissionRequestSupportType_Support);
+                    if (completeHandle) {
+                        completeHandle(CHPermissionRequestSupportType_Support);
+                    }
                 });
             }
             break;
@@ -258,14 +294,18 @@
                     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
                         if (granted) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
+                                if (completeHandle) {
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                }
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                                 }
                             });
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                completeHandle(CHPermissionRequestSupportType_Support);
+                                if (completeHandle) {
+                                    completeHandle(CHPermissionRequestSupportType_Support);
+                                }
                                 if (self.permissionRequestResultBlock) {
                                     self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                                 }
@@ -277,7 +317,9 @@
                 case AVAuthorizationStatusAuthorized:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                         }
@@ -287,7 +329,9 @@
                 case AVAuthorizationStatusRestricted:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_ParentallyRestricted);
                         }
@@ -296,7 +340,9 @@
                 case AVAuthorizationStatusDenied:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                         }
@@ -319,7 +365,9 @@
                 case AVAuthorizationStatusNotDetermined:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_NotExplicit);
                         }
@@ -329,7 +377,9 @@
                 case AVAuthorizationStatusAuthorized:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Granted);
                         }
@@ -339,7 +389,9 @@
                 case AVAuthorizationStatusRestricted:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_ParentallyRestricted);
                         }
@@ -349,7 +401,9 @@
                 case AVAuthorizationStatusDenied:
                 {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completeHandle(CHPermissionRequestSupportType_Support);
+                        if (completeHandle) {
+                            completeHandle(CHPermissionRequestSupportType_Support);
+                        }
                         if (self.permissionRequestResultBlock) {
                             self.permissionRequestResultBlock(CHPermissionRequestResultType_Reject);
                         }
